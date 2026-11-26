@@ -87,7 +87,7 @@ button{font-family:inherit}
 @keyframes hitFlash{0%{opacity:0}12%{opacity:.9}100%{opacity:0}}
 
 /* ════════════ DUALSENSE SVG ════════════ */
-.dualsense{position:absolute;z-index:4;bottom:-1vh;left:50%;transform:translateX(-50%);width:min(94vw,205vh);height:auto;max-height:56vh;filter:drop-shadow(0 1.5vmin 3vmin rgba(0,0,0,.65))}
+.dualsense{position:absolute;z-index:4;bottom:-1vh;left:50%;transform:translateX(-50%);height:min(62vh,29vw);width:auto;max-width:96vw;filter:drop-shadow(0 1.5vmin 3vmin rgba(0,0,0,.65))}
 .gpt{pointer-events:auto;cursor:pointer}
 .gpt{transform-box:fill-box;transform-origin:center;transition:transform .07s ease,filter .07s ease}
 .gpt.down{transform:scale(.9);filter:brightness(1.12)}
