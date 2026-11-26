@@ -1,4 +1,4 @@
-# Gta lV — «эмулятор GTA 6» (фанатская сборка)
+# Gta Vl — «эмулятор GTA 6» (фанатская сборка)
 
 Неофициальное фанатское приложение-шутка под Android: выглядит как эмулятор
 PlayStation 5 с игрой **Grand Theft Auto VI** — запуск, экран загрузки
@@ -9,7 +9,7 @@ PlayStation 5 с игрой **Grand Theft Auto VI** — запуск, экран
 
 ## Что внутри
 
-- **Имя АПК:** `Gta lV` (`com.gtalv.emulator`, версия 1.0.8)
+- **Имя АПК:** `Gta Vl` (`com.gtalv.emulator`, версия 1.0.8)
 - **Иконка:** официальный кей-арт GTA VI
 - **Главный экран «EMULATOR»:** тёмный фон, один тайл GTA VI, кнопка **Играть**
 - **Экран загрузки:** неоновый логотип VI и тонкая белая полоса
@@ -22,7 +22,7 @@ PlayStation 5 с игрой **Grand Theft Auto VI** — запуск, экран
 ## Установка
 
 ```bash
-adb install "dist/Gta-lV.apk"
+adb install "dist/Gta-Vl.apk"
 # либо скинуть APK на телефон и открыть (разрешить установку из неизвестных источников)
 ```
 
@@ -32,7 +32,7 @@ adb install "dist/Gta-lV.apk"
 ./build.sh   # инструменты подтянутся сами (apktool 2.9.3 + apksigner через npm)
 ```
 
-Готовый APK: `dist/Gta-lV.apk` (подпись v1+v2+v3, debug-ключ, `resources.arsc` хранится без сжатия и выровнен по 4 байтам — обязательно для Android 11+).
+Готовый APK: `dist/Gta-Vl.apk` (подпись v1+v2+v3, debug-ключ, `resources.arsc` хранится без сжатия и выровнен по 4 байтам — обязательно для Android 11+).
 
 ## Структура
 

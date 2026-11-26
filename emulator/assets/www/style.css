@@ -31,8 +31,8 @@ button{font-family:inherit;color:inherit;background:none;border:none;cursor:poin
 .game-row{position:absolute;z-index:2;left:0;right:0;top:15vmin;display:flex;align-items:center;justify-content:center}
 .tile{position:relative;border-radius:2vmin;overflow:hidden;outline:none;transition:transform .18s ease,box-shadow .22s ease}
 .tile:active{transform:scale(.96)}
-.tile-art{border:3px solid rgba(255,255,255,.92);box-shadow:0 0 0 4px rgba(0,0,0,.45),0 1.4vmin 4vmin rgba(255,46,136,.42)}
-.tile-art img{width:100%;height:100%;object-fit:cover;object-position:center 32%;display:block}
+.tile-art{border:3px solid rgba(255,255,255,.92);background:#000;box-shadow:0 0 0 4px rgba(0,0,0,.45),0 1.4vmin 4vmin rgba(255,46,136,.42)}
+.tile-art img{width:100%;height:100%;object-fit:contain;display:block}
 .tile-shine{position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.35) 45%,transparent 60%);background-size:250% 100%;animation:shine 3.4s ease-in-out infinite}
 @keyframes shine{0%{background-position:120% 0}60%,100%{background-position:-80% 0}}
 .tile-big{width:34vmin;height:34vmin}
@@ -77,40 +77,47 @@ button{font-family:inherit;color:inherit;background:none;border:none;cursor:poin
 /* ════════════ ОВЕРЛЕЙ ГЕЙМПАДА ════════════ */
 .pad{position:absolute;inset:0;z-index:4;pointer-events:none}
 .pad.hidden{display:none}
-.xp{position:absolute;pointer-events:auto;display:flex;align-items:center;justify-content:center;color:#b4b4b4;background:rgba(10,10,10,.15);border:2.4px solid var(--xp);transition:border-color .1s,color .1s,box-shadow .1s,transform .08s}
+.xp{position:absolute;pointer-events:auto;display:flex;align-items:center;justify-content:center;color:#b4b4b4;background:rgba(10,10,10,.22);border:2.4px solid var(--xp);transition:border-color .1s,color .1s,box-shadow .1s,transform .08s;box-sizing:border-box}
 .xp.down{border-color:var(--xp-hi);color:#fff;box-shadow:0 0 1.8vmin rgba(255,255,255,.35),inset 0 0 2vmin rgba(255,255,255,.18);transform:scale(.94)}
-.xp span{font-size:2.1vmin;font-weight:600;letter-spacing:.08em}
+.xp span{font-size:2vmin;font-weight:600;letter-spacing:.08em}
 
-.xp-trigger{width:9.2%;height:11%;border-radius:1.5vmin;min-width:74px;min-height:44px;background:rgba(10,10,10,.25)}
-.lt{left:4.2%;top:19%}
-.lb{left:4.2%;top:33%}
-.rt{right:4.2%;top:19%}
-.rb{right:4.2%;top:33%}
+/* ряды триггеров/бамперов: одинаковые размеры, на одной высоте */
+.xp-trigger{width:8.5%;min-width:76px;height:12%;border-radius:1.6vmin}
+.lt{left:5.5%;top:17%}
+.lb{left:5.5%;top:33%}
+.rt{right:5.5%;top:17%}
+.rb{right:5.5%;top:33%}
 
-.dpad{position:absolute;left:10.6%;top:14.5%;width:15.5%;min-width:112px;pointer-events:auto;overflow:visible}
-.petal path{fill:rgba(10,10,10,.3);stroke:var(--xp);stroke-width:2.6;stroke-linejoin:round;transition:stroke .1s,fill .1s}
-.xp-d{cursor:pointer;pointer-events:auto}
-.xp-d.down path{fill:rgba(255,255,255,.14);stroke:#fff}
+/* D-pad: ровный плюс */
+.dpad{position:absolute;left:15%;top:12.5%;width:14%;min-width:112px;pointer-events:auto;overflow:visible}
+.dpad-art rect{fill:rgba(10,10,10,.35);stroke:var(--xp);stroke-width:2.6;stroke-linejoin:round}
+.dpad-art circle{fill:#1c1c22;stroke:var(--xp);stroke-width:2}
+.dhit rect{fill:#fff;fill-opacity:0;cursor:pointer}
+.dhit.down rect{fill:#fff;fill-opacity:.16}
 
-.xp-square{right:13.2%;top:16%;width:14.6%;aspect-ratio:1/1;border-radius:1.9vmin;min-width:104px;min-height:104px;background:rgba(10,10,10,.25)}
+/* большой сквар */
+.xp-square{right:15.5%;top:14%;width:12.5%;aspect-ratio:1/1;border-radius:2vmin;min-width:100px;min-height:100px}
 
-.stick{left:4.4%;top:56%;width:19vmin;height:19vmin;border-radius:50%;background:rgba(10,10,10,.25)}
+/* левый стик и L3 */
+.stick{left:5.5%;top:54%;width:18.5vmin;height:18.5vmin;border-radius:50%}
 .stick-cap{width:56%;height:56%;border-radius:50%;background:#3c3c3c;border:1px solid rgba(255,255,255,.14)}
+.l3{left:17.5%;bottom:4%}
+.r3{left:73%;bottom:4%}
 
-.circle{border-radius:50%;width:12.4vmin;height:12.4vmin;font-size:2.4vmin}
+/* ABXY — идеальный ромб вокруг одной оси */
+.circle{border-radius:50%;width:12.2vmin;height:12.2vmin}
 .circle.small{width:8.4vmin;height:8.4vmin}
 .circle.small span{font-size:1.5vmin}
-.face span{font-size:2.5vmin;font-weight:500}
-.y{left:80.6%;top:50.5%}
-.x{left:74.3%;top:63.6%}
-.b{left:87.2%;top:63.6%}
-.a{left:80.6%;top:76.6%}
-.l3{left:17.3%;bottom:3.4%}
-.r3{left:74.3%;bottom:3.2%}
+.face span{font-size:2.6vmin;font-weight:500}
+.y{left:78.9%;top:50.5%}
+.x{left:71.6%;top:63.3%}
+.b{left:86.2%;top:63.3%}
+.a{left:78.9%;top:76.1%}
 
+/* view / menu */
 .pill{width:10.6vmin;height:6.2vmin;min-width:88px;min-height:44px;border-radius:99px}
-.pill.view{left:41.3%;bottom:3.6%}
-.pill.menu{left:51.8%;bottom:3.6%}
+.pill.view{left:41.3%;bottom:3.2%}
+.pill.menu{left:51.8%;bottom:3.2%}
 .pill svg{color:#b4b4b4}
 .pill.down svg{color:#fff}
 

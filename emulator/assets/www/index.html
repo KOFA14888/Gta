@@ -33,7 +33,7 @@
 
     <div class="game-row single">
       <button class="tile tile-art selected tile-big" id="tileGtaVI" aria-label="Grand Theft Auto VI — играть">
-        <img src="img/bg_keyart.jpg" alt="Grand Theft Auto VI" draggable="false">
+        <img src="img/vi_logo.jpg" alt="Grand Theft Auto VI" draggable="false">
         <span class="tile-shine"></span>
       </button>
     </div>
@@ -76,10 +76,15 @@
       <button class="xp xp-trigger lb" data-btn="LB"><span>LB</span></button>
       <!-- D-pad -->
       <svg class="dpad" viewBox="0 0 132 150" aria-hidden="true">
-        <g class="xp-d petal up" data-btn="DUP"><path d="M66 4a12 12 0 0 1 12 12v33H54V16A12 12 0 0 1 66 4z"/></g>
-        <g class="xp-d petal right" data-btn="DRIGHT"><path d="M128 66a12 12 0 0 0-12-12H83v48h33a12 12 0 0 0 12-12z"/></g>
-        <g class="xp-d petal down" data-btn="DDOWN"><path d="M66 146a12 12 0 0 1-12-12V101h24v33a12 12 0 0 1-12 12z"/></g>
-        <g class="xp-d petal left" data-btn="DLEFT"><path d="M4 66a12 12 0 0 0 12 12h33V54H16A12 12 0 0 0 4 66z"/></g>
+        <g class="dpad-art">
+          <rect x="44" y="4" width="44" height="142" rx="12"/>
+          <rect x="0" y="53" width="132" height="44" rx="12"/>
+          <circle cx="66" cy="75" r="15"/>
+        </g>
+        <g class="xp-d dhit" data-btn="DUP"><rect x="38" y="0" width="56" height="62" rx="10"/></g>
+        <g class="xp-d dhit" data-btn="DDOWN"><rect x="38" y="88" width="56" height="62" rx="10"/></g>
+        <g class="xp-d dhit" data-btn="DLEFT"><rect x="0" y="46" width="52" height="58" rx="10"/></g>
+        <g class="xp-d dhit" data-btn="DRIGHT"><rect x="80" y="46" width="52" height="58" rx="10"/></g>
       </svg>
 
       <!-- RT / RB -->
