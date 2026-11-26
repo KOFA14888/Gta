@@ -62,22 +62,19 @@ button{font-family:inherit;color:inherit;background:none;border:none;cursor:poin
 #screen-game.shake #gameVideo{animation:shake .18s linear}
 @keyframes shake{0%{transform:translate(0,0) scale(1.02)}25%{transform:translate(-.7vmin,.4vmin) scale(1.02)}50%{transform:translate(.6vmin,-.5vmin) scale(1.02)}75%{transform:translate(-.4vmin,-.2vmin) scale(1.02)}100%{transform:none}}
 
-.hit-flash{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;background:radial-gradient(55% 65% at 68% 60%,rgba(255,190,80,.8),rgba(255,80,30,.3) 45%,transparent 72%)}
-.hit-flash.fire{animation:hitFlash .3s ease-out}
-@keyframes hitFlash{0%{opacity:0}12%{opacity:.9}100%{opacity:0}}
-.shot-flash{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0;background:#fff}
-.shot-flash.fire{animation:shotFlash .35s ease-out}
-@keyframes shotFlash{0%{opacity:0}8%{opacity:.85}100%{opacity:0}}
-.vol-hint{position:absolute;z-index:6;top:6vmin;left:50%;transform:translateX(-50%);padding:.7vmin 2vmin;border-radius:99px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.18);font-size:1.5vmin;letter-spacing:.06em;opacity:0;transition:opacity .2s;pointer-events:none}
-.vol-hint.show{opacity:1}
 
-.pad-toggle{position:absolute;z-index:7;top:2vmin;right:2.2vmin;width:5.6vmin;height:5.6vmin;min-width:38px;min-height:38px;border-radius:50%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;opacity:.8}
-.pad-toggle:active{transform:scale(.92)}
+@keyframes hitFlash{0%{opacity:0}12%{opacity:.9}100%{opacity:0}}
+
+@keyframes shotFlash{0%{opacity:0}8%{opacity:.85}100%{opacity:0}}
+
+
+
 
 /* ════════════ ОВЕРЛЕЙ ГЕЙМПАДА ════════════ */
 .pad{position:absolute;inset:0;z-index:4;pointer-events:none}
+.pad, .pad *{pointer-events:none !important}
 .pad.hidden{display:none}
-.xp{position:absolute;pointer-events:auto;display:flex;align-items:center;justify-content:center;color:#b4b4b4;background:rgba(10,10,10,.22);border:2.4px solid var(--xp);transition:border-color .1s,color .1s,box-shadow .1s,transform .08s;box-sizing:border-box}
+.xp{position:absolute;display:flex;align-items:center;justify-content:center;color:#b4b4b4;background:rgba(10,10,10,.22);border:2.4px solid var(--xp);transition:border-color .1s,color .1s,box-shadow .1s,transform .08s;box-sizing:border-box}
 .xp.down{border-color:var(--xp-hi);color:#fff;box-shadow:0 0 1.8vmin rgba(255,255,255,.35),inset 0 0 2vmin rgba(255,255,255,.18);transform:scale(.94)}
 .xp span{font-size:2vmin;font-weight:600;letter-spacing:.08em}
 
@@ -89,7 +86,7 @@ button{font-family:inherit;color:inherit;background:none;border:none;cursor:poin
 .rb{right:5.5%;top:33%}
 
 /* D-pad: ровный плюс */
-.dpad{position:absolute;left:15%;top:12.5%;width:14%;min-width:112px;pointer-events:auto;overflow:visible}
+.dpad{position:absolute;left:15%;top:12.5%;width:14%;min-width:112px;overflow:visible}
 .dpad-art rect{fill:rgba(10,10,10,.35);stroke:var(--xp);stroke-width:2.6;stroke-linejoin:round}
 .dpad-art circle{fill:#1c1c22;stroke:var(--xp);stroke-width:2}
 .dhit rect{fill:#fff;fill-opacity:0;cursor:pointer}

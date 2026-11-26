@@ -1,7 +1,6 @@
 'use strict';
 const $ = (s, r) => (r || document).querySelector(s);
 const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
-const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
 /* ─────────── ЗВУКИ ─────────── */
 let actx = null;
@@ -10,38 +9,21 @@ function audio(){
   if(actx && actx.state === 'suspended') actx.resume();
   return actx;
 }
-function tone(freq, dur, type, vol, when, slideTo){
+function tone(freq, dur, type, vol, when){
   const a = audio(); if(!a) return;
   const t0 = a.currentTime + (when || 0);
   const o = a.createOscillator(), g = a.createGain();
   o.type = type || 'sine';
   o.frequency.setValueAtTime(freq, t0);
-  if(slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t0 + dur);
   g.gain.setValueAtTime(0.0001, t0);
   g.gain.exponentialRampToValueAtTime(vol || 0.16, t0 + 0.012);
   g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
   o.connect(g); g.connect(a.destination);
   o.start(t0); o.stop(t0 + dur + 0.02);
 }
-function noiseBurst(dur, vol, when, low){
-  const a = audio(); if(!a) return;
-  const t0 = a.currentTime + (when || 0);
-  const len = Math.floor(a.sampleRate * dur);
-  const buf = a.createBuffer(1, len, a.sampleRate);
-  const d = buf.getChannelData(0);
-  for(let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.4);
-  const src = a.createBufferSource(); src.buffer = buf;
-  const f = a.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = low || 700;
-  const g = a.createGain(); g.gain.value = vol || 0.5;
-  src.connect(f); f.connect(g); g.connect(a.destination); src.start(t0);
-}
 const sfx = {
-  move(){ tone(1500, 0.035, 'triangle', 0.09); },
   back(){ tone(900, 0.05, 'triangle', 0.09); },
   open(){ tone(660, 0.09, 'sine', 0.14); tone(990, 0.22, 'sine', 0.12, 0.08); },
-  denied(){ tone(240, 0.12, 'sine', 0.1); },
-  shot(){ noiseBurst(0.15, 0.5, 0, 700); tone(140, 0.16, 'square', 0.28, 0, 55); },
-  shutter(){ tone(2600, 0.04, 'square', 0.18); tone(1200, 0.06, 'square', 0.16, 0.07); },
   chime(){ tone(220, 0.8, 'sine', 0.18); tone(440, 0.9, 'sine', 0.13, 0.1); tone(880, 1.1, 'sine', 0.09, 0.2); }
 };
 
@@ -127,80 +109,9 @@ $('#videoFallback').addEventListener('click', () => {
   video.play().then(() => $('#videoFallback').classList.add('hidden')).catch(() => {});
 });
 video.addEventListener('ended', () => $('#gameEnd').classList.remove('hidden'));
+video.addEventListener('click', () => togglePause()); /* тап по видео — пауза */
 
-/* ─────────── ДЕЙСТВИЯ ─────────── */
-const gameScreen = $('#screen-game');
-const hitFlash = $('#hitFlash');
-const shotFlash = $('#shotFlash');
-const volHint = $('#volHint');
-function fire(){
-  hitFlash.classList.remove('fire'); void hitFlash.offsetWidth; hitFlash.classList.add('fire');
-  gameScreen.classList.remove('shake'); void gameScreen.offsetWidth; gameScreen.classList.add('shake');
-  sfx.shot();
-}
-function replay(){
-  video.currentTime = 0;
-  const p = video.play(); if(p && p.catch) p.catch(() => {});
-  sfx.open();
-}
-let volT = null;
-function setVolume(delta){
-  video.volume = clamp(video.volume + delta, 0, 1);
-  volHint.textContent = 'Громкость ' + Math.round(video.volume * 100) + '%';
-  volHint.classList.add('show');
-  clearTimeout(volT);
-  volT = setTimeout(() => volHint.classList.remove('show'), 900);
-  sfx.move();
-}
-function seek(delta){
-  video.currentTime = clamp(video.currentTime + delta, 0, video.duration || 0);
-  sfx.move();
-}
-function screenshot(){
-  shotFlash.classList.remove('fire'); void shotFlash.offsetWidth; shotFlash.classList.add('fire');
-  sfx.shutter();
-}
-
-/* ─────────── ОВЕРЛЕЙ (одна регистрация на кнопку) ─────────── */
-const pad = $('#pad');
-const padToggle = $('#padToggle');
-function showPad(v){
-  pad.classList.toggle('hidden', !v);
-  padToggle.classList.toggle('hidden', v);
-}
-padToggle.addEventListener('click', () => { showPad(true); sfx.move(); });
-
-function bindBtn(el){
-  const down = e => {
-    e.preventDefault();
-    el.classList.add('down');
-    const b = el.dataset.btn;
-    switch(b){
-      case 'A': case 'RT': case 'LT': fire(); break;
-      case 'B': case 'MENU': togglePause(); break;
-      case 'X': case 'VIEW': replay(); break;
-      case 'LB': setVolume(-0.1); break;
-      case 'RB': setVolume(0.1); break;
-      case 'DUP': setVolume(0.1); break;
-      case 'DDOWN': setVolume(-0.1); break;
-      case 'DLEFT': seek(-5); break;
-      case 'DRIGHT': seek(5); break;
-      case 'Y': showPad(false); sfx.back(); break;
-      case 'SQUARE': screenshot(); break;
-      default: sfx.move();
-    }
-  };
-  const up = () => el.classList.remove('down');
-  el.addEventListener('pointerdown', down);
-  el.addEventListener('pointerup', up);
-  el.addEventListener('pointercancel', up);
-  el.addEventListener('pointerleave', up);
-  el.addEventListener('contextmenu', e => e.preventDefault());
-}
-$$('.xp').forEach(bindBtn);
-$$('.xp-d').forEach(bindBtn);
-
-/* ─────────── PERF-МОНИТОР ─────────── */
+/* ─────────── PERF-МОНИТОР (декорация) ─────────── */
 const pf = { gpu: $('#pfGpu'), cpu: $('#pfCpu'), ram: $('#pfRam'), pwr: $('#pfPwr'), fps: $('#pfFps') };
 const pc = $('#pfGraph');
 const pctx = pc.getContext('2d');
@@ -244,14 +155,13 @@ function togglePause(show){
   const pm = $('#pauseMenu');
   const willShow = show !== undefined ? show : pm.classList.contains('hidden');
   pm.classList.toggle('hidden', !willShow);
-  if(willShow){ video.pause(); sfx.move(); }
-  else { const p = video.play(); if(p && p.catch) p.catch(() => {}); sfx.move(); }
+  if(willShow){ video.pause(); sfx.back(); }
+  else { const p = video.play(); if(p && p.catch) p.catch(() => {}); sfx.back(); }
 }
 function backToMenu(){
   video.pause(); video.currentTime = 0;
   $('#pauseMenu').classList.add('hidden');
   $('#gameEnd').classList.add('hidden');
-  showPad(true);
   sfx.back();
   applyScreen('launch');
 }
