@@ -109,7 +109,6 @@ $('#videoFallback').addEventListener('click', () => {
   video.play().then(() => $('#videoFallback').classList.add('hidden')).catch(() => {});
 });
 video.addEventListener('ended', () => $('#gameEnd').classList.remove('hidden'));
-video.addEventListener('click', () => togglePause()); /* тап по видео — пауза */
 
 /* ─────────── PERF-МОНИТОР (декорация) ─────────── */
 const pf = { gpu: $('#pfGpu'), cpu: $('#pfCpu'), ram: $('#pfRam'), pwr: $('#pfPwr'), fps: $('#pfFps') };
@@ -165,6 +164,7 @@ function backToMenu(){
   sfx.back();
   applyScreen('launch');
 }
+$('#pauseBtn').addEventListener('click', () => togglePause(true));
 $('#pmResume').addEventListener('click', () => togglePause(false));
 $('#pmExit').addEventListener('click', backToMenu);
 $('#geMenuBtn').addEventListener('click', backToMenu);
