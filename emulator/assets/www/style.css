@@ -148,6 +148,6 @@ button{font-family:inherit;color:inherit;background:none;border:none;cursor:poin
 .vf-circle{width:12vmin;height:12vmin;min-width:84px;min-height:84px;border-radius:50%;border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08)}
 .vf-text{font-size:1.5vmin;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.85)}
 
-.pause-mini{position:absolute;z-index:6;top:2vmin;right:2.2vmin;width:5.4vmin;height:5.4vmin;min-width:36px;min-height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.28);background:rgba(0,0,0,.42);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:.75;transition:opacity .15s,transform .15s;pointer-events:auto}
+.pause-mini{position:absolute;z-index:7;top:2vmin;right:2.2vmin;width:7vmin;height:7vmin;min-width:46px;min-height:46px;border-radius:50%;border:2px solid rgba(255,255,255,.45);background:rgba(0,0,0,.55);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:.95;transition:opacity .15s,transform .15s;pointer-events:auto}
 .pause-mini:hover{opacity:1}
 .pause-mini:active{transform:scale(.9)}
