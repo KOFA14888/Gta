@@ -30,20 +30,23 @@ if [ ! -f emulator/assets/video/gameplay.mp4 ]; then
   "$FFMPEG" -y -ss 1.0 -i VID_20261127_010751_579.mp4 -map 0 -c:v libx264 -preset veryfast -crf 21 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart emulator/assets/video/gameplay.mp4
 fi
 
-echo "== 4/5 Сборка APK =="
-rm -f dist/GtaV_unsigned.apk
+echo "== 4/6 Сборка APK =="
+rm -f dist/GtaV_unsigned.apk dist/Gta-lV-unsigned.apk
 java -jar "$TOOLS/apktool.jar" b -f -o dist/GtaV_unsigned.apk emulator
 
-echo "== 5/5 Подпись (debug keystore) =="
+echo "== 5/6 Выравнивание resources.arsc (Android 11+) =="
+python3 tools/align_arsc.py dist/GtaV_unsigned.apk dist/Gta-lV-unsigned.apk
+
+echo "== 6/6 Подпись (debug keystore) =="
 if [ ! -f keystore.jks ]; then
   keytool -genkeypair -keystore keystore.jks -alias gtalv -keyalg RSA -keysize 2048 -validity 10000 \
     -storepass androiddebugkey -keypass androiddebugkey -dname "CN=Gta lV, OU=ViperEngine, O=ViceCity, L=ViceCity, S=VC, C=US"
 fi
 rm -f "dist/Gta lV.apk"
 java -jar "$TOOLS/apksigner.jar" sign --ks keystore.jks --ks-pass pass:androiddebugkey --ks-key-alias gtalv \
-  --key-pass pass:androiddebugkey --out "dist/Gta lV.apk" dist/GtaV_unsigned.apk
-java -jar "$TOOLS/apksigner.jar" verify --verbose "dist/Gta lV.apk"
+  --key-pass pass:androiddebugkey --out "dist/Gta-lV.apk" dist/Gta-lV-unsigned.apk
+java -jar "$TOOLS/apksigner.jar" verify --verbose "dist/Gta-lV.apk"
 
 echo
-echo "Готово → dist/Gta lV.apk"
-echo "Установка: adb install \"dist/Gta lV.apk\""
+echo "Готово → dist/Gta-lV.apk"
+echo "Установка: adb install \"dist/Gta-lV.apk\""

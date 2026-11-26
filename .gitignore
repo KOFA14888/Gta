@@ -2,7 +2,6 @@
 keystore.jks
 *.idsig
 node_modules/
-tools/
 
 # ОС/редакторы
 .DS_Store

@@ -22,7 +22,7 @@ PlayStation 5 с игрой **Grand Theft Auto VI** — запуск, экран
 ## Установка
 
 ```bash
-adb install "dist/Gta lV.apk"
+adb install "dist/Gta-lV.apk"
 # либо скинуть APK на телефон и открыть (разрешить установку из неизвестных источников)
 ```
 
@@ -32,7 +32,7 @@ adb install "dist/Gta lV.apk"
 ./build.sh   # инструменты подтянутся сами (apktool 2.9.3 + apksigner через npm)
 ```
 
-Готовый APK: `dist/Gta lV.apk` (подпись v1+v2+v3, debug-ключ).
+Готовый APK: `dist/Gta-lV.apk` (подпись v1+v2+v3, debug-ключ, `resources.arsc` хранится без сжатия и выровнен по 4 байтам — обязательно для Android 11+).
 
 ## Структура
 
