@@ -4,71 +4,53 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<title>Grand Theft Auto VI</title>
+<title>GTA VI — Emulator</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main id="app">
 
-  <!-- ══════════ PS5 · ГЛАВНЫЙ ЭКРАН ══════════ -->
+  <!-- ══════════ ГЛАВНЫЙ ЭКРАН ══════════ -->
   <section id="screen-launch" class="screen active">
     <div class="launch-bg"></div>
     <div class="launch-tint"></div>
 
     <header class="topbar">
       <div class="brand">
-        <svg viewBox="0 0 48 40" width="26" height="22" aria-hidden="true">
-          <path d="M11 4v26.5l7.3 2.4V11c0-1.2.6-1.9 1.7-1.5 1.3.4 2 1.8 2 3.8v13.4l6.5 2.2V13.3c0-5.6-1.7-8.7-6.8-10.6-3-1.1-8.2-.4-10.7 1.3z" fill="#fff" opacity="0.92"/>
-          <path d="M31 26.3c3.9-1.1 5.9-2.9 5.9-5.1 0-2.8-2.6-4.3-6.6-3.3l-2.7.9v3.3l2.2.8c1.6.5 2.4 1 2.4 1.8s-1.3 1.5-3.5 2.1zm5.5-8.8c2.3-.7 3.6-1.6 3.6-2.8 0-1.8-2-2.6-4.8-1.9l-3.4 1v2.9l2.3.7" fill="#8fb7ff" opacity="0.85"/>
+        <svg viewBox="0 0 24 18" width="28" height="21" aria-hidden="true">
+          <rect x="1.2" y="3.2" width="21.6" height="12" rx="6" fill="none" stroke="#fff" stroke-width="1.7"/>
+          <path d="M7 7.2v4.4M4.8 9.4h4.4" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
+          <circle cx="15" cy="7.9" r="1" fill="#fff"/><circle cx="17.6" cy="10.5" r="1" fill="#fff"/>
         </svg>
-        <span class="brand-text">PlayStation&nbsp;5</span>
+        <span class="brand-text">EMULATOR</span>
       </div>
       <div class="topbar-right">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M15.5 15.5 21 21" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
         <svg viewBox="0 0 30 16" width="27" height="15" aria-hidden="true"><rect x="1" y="2.5" width="23" height="11" rx="3" fill="none" stroke="#fff" stroke-width="1.6"/><rect x="3.8" y="5.3" width="12" height="5.4" rx="1.4" fill="#fff"/><rect x="26" y="6" width="3" height="4" rx="1" fill="#fff"/></svg>
         <span id="psClock" class="clock">22:30</span>
         <div class="avatar">VC</div>
       </div>
     </header>
 
-    <div class="game-row" id="gameRow">
-      <button class="tile tile-text tile-gtav locked" data-locked="1" aria-label="GTA V">
-        <span class="tile-word">V</span><span class="tile-name">GTA V</span>
-      </button>
-      <button class="tile tile-text tile-online locked" data-locked="1" aria-label="GTA Online">
-        <span class="tile-word">GTA</span><span class="tile-name">ONLINE</span>
-      </button>
-      <button class="tile tile-art selected" id="tileGtaVI" aria-label="Grand Theft Auto VI — играть">
+    <div class="game-row single">
+      <button class="tile tile-art selected tile-big" id="tileGtaVI" aria-label="Grand Theft Auto VI — играть">
         <img src="img/bg_keyart.jpg" alt="Grand Theft Auto VI" draggable="false">
         <span class="tile-shine"></span>
-      </button>
-      <button class="tile tile-text tile-rdr locked" data-locked="1" aria-label="Red Dead Redemption II">
-        <span class="tile-word">RDR</span><span class="tile-name">RED DEAD II</span>
       </button>
     </div>
 
     <div class="launch-info">
-      <div class="li-kicker">PS5</div>
       <h1 class="li-title">Grand Theft Auto <em>VI</em></h1>
       <div class="li-edition">Digital Deluxe Edition</div>
       <button id="playBtn" class="play-pill" aria-label="Играть">
-        <span class="x-dot">×</span><span class="play-pill-text" id="playLabel">Играть</span>
+        <span class="x-dot"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M9 6.5v11l9-5.5z" fill="#fff"/></svg></span>
+        <span class="play-pill-text" id="playLabel">Играть</span>
       </button>
-    </div>
-
-    <div class="hints">
-      <span class="hint"><b>×</b> Выбрать</span>
-      <span class="hint"><b>○</b> Назад</span>
     </div>
   </section>
 
-  <!-- ══════════ BOOT (PS-стиль, минимал) ══════════ -->
+  <!-- ══════════ ЗАГРУЗКА ══════════ -->
   <section id="screen-boot" class="screen">
-    <svg class="boot-ps" viewBox="0 0 48 40" aria-hidden="true">
-      <path d="M11 4v26.5l7.3 2.4V11c0-1.2.6-1.9 1.7-1.5 1.3.4 2 1.8 2 3.8v13.4l6.5 2.2V13.3c0-5.6-1.7-8.7-6.8-10.6-3-1.1-8.2-.4-10.7 1.3z" fill="#fff" opacity="0.96"/>
-      <path d="M31 26.3c3.9-1.1 5.9-2.9 5.9-5.1 0-2.8-2.6-4.3-6.6-3.3l-2.7.9v3.3l2.2.8c1.6.5 2.4 1 2.4 1.8s-1.3 1.5-3.5 2.1zm5.5-8.8c2.3-.7 3.6-1.6 3.6-2.8 0-1.8-2-2.6-4.8-1.9l-3.4 1v2.9l2.3.7" fill="#fff" opacity="0.55"/>
-    </svg>
-    <div class="boot-game">GRAND&nbsp;THEFT&nbsp;AUTO&nbsp;VI</div>
+    <img class="boot-logo" src="img/vi_logo.jpg" alt="Grand Theft Auto VI" draggable="false">
     <div class="boot-bar"><div id="bootFill" class="boot-fill"></div></div>
   </section>
 
@@ -81,174 +63,78 @@
     </div>
 
     <div id="hitFlash" class="hit-flash"></div>
-
-    <button id="menuBtn" class="pause-mini" aria-label="Пауза">
-      <svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 5h2.6v14H8zM13.4 5H16v14h-2.6z" fill="#fff"/></svg>
+    <div id="shotFlash" class="shot-flash"></div>
+    <div id="volHint" class="vol-hint"></div>
+    <button id="padToggle" class="pad-toggle hidden" aria-label="Показать кнопки">
+      <svg viewBox="0 0 24 18" width="22" height="17"><rect x="1.2" y="3.2" width="21.6" height="12" rx="6" fill="none" stroke="#fff" stroke-width="1.7"/><path d="M7 7.2v4.4M4.8 9.4h4.4" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/><circle cx="15" cy="7.9" r="1" fill="#fff"/><circle cx="17.6" cy="10.5" r="1" fill="#fff"/></svg>
     </button>
 
-    <!-- ═══ ВИРТУАЛЬНЫЙ DUALSENSE ═══ -->
-    <svg id="dualsense" class="dualsense" viewBox="0 0 960 428" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.38" stop-color="#edeff3"/>
-          <stop offset="0.72" stop-color="#d5d7df"/><stop offset="1" stop-color="#b7bbc8"/>
-        </linearGradient>
-        <linearGradient id="triggerGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#c3c6cf"/><stop offset="1" stop-color="#878b99"/>
-        </linearGradient>
-        <linearGradient id="bumperGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#fbfbfd"/><stop offset="1" stop-color="#c9cbd5"/>
-        </linearGradient>
-        <linearGradient id="touchGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#e8e9ee"/><stop offset="1" stop-color="#c2c4cd"/>
-        </linearGradient>
-        <radialGradient id="stickGrad" cx="0.5" cy="0.42" r="0.62">
-          <stop offset="0" stop-color="#3c3d47"/><stop offset="1" stop-color="#15161d"/>
-        </radialGradient>
-        <radialGradient id="capGrad" cx="0.42" cy="0.36" r="0.75">
-          <stop offset="0" stop-color="#4b4c58"/><stop offset="0.6" stop-color="#22232c"/><stop offset="1" stop-color="#101118"/>
-        </radialGradient>
-        <radialGradient id="btnGrad" cx="0.5" cy="0.38" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dcdde4"/>
-        </radialGradient>
-        <linearGradient id="ledGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#59d8ff"/><stop offset="0.5" stop-color="#eaf6ff"/><stop offset="1" stop-color="#59d8ff"/>
-        </linearGradient>
-        <radialGradient id="vignetteGrad" cx="0.5" cy="0.5" r="0.72">
-          <stop offset="0.72" stop-color="#000" stop-opacity="0"/>
-          <stop offset="1" stop-color="#000" stop-opacity="0.5"/>
-        </radialGradient>
-        <filter id="ledGlow" x="-80%" y="-80%" width="260%" height="260%">
-          <feGaussianBlur stdDeviation="5" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
+    <!-- ═══ ВИРТУАЛЬНЫЙ ГЕЙМПАД (эмулятор-оверлей) ═══ -->
+    <div id="pad" class="pad">
+      <!-- LT / LB -->
+      <button class="xp xp-trigger lt" data-btn="LT"><span>LT</span></button>
+      <button class="xp xp-trigger lb" data-btn="LB"><span>LB</span></button>
+      <!-- D-pad -->
+      <svg class="dpad" viewBox="0 0 132 150" aria-hidden="true">
+        <g class="xp-d petal up" data-btn="DUP"><path d="M66 4a12 12 0 0 1 12 12v33H54V16A12 12 0 0 1 66 4z"/></g>
+        <g class="xp-d petal right" data-btn="DRIGHT"><path d="M128 66a12 12 0 0 0-12-12H83v48h33a12 12 0 0 0 12-12z"/></g>
+        <g class="xp-d petal down" data-btn="DDOWN"><path d="M66 146a12 12 0 0 1-12-12V101h24v33a12 12 0 0 1-12 12z"/></g>
+        <g class="xp-d petal left" data-btn="DLEFT"><path d="M4 66a12 12 0 0 0 12 12h33V54H16A12 12 0 0 0 4 66z"/></g>
+      </svg>
 
-      <!-- триггеры и бамперы -->
-      <g class="gpt trg" data-btn="L2">
-        <rect x="120" y="4" width="218" height="56" rx="15" fill="url(#triggerGrad)" stroke="#6f727f" stroke-width="1.4"/>
-        <rect x="136" y="12" width="186" height="9" rx="4.5" fill="#ffffff" opacity="0.35"/>
-        <text x="229" y="38" class="cap-text">L2</text>
-      </g>
-      <g class="gpt trg" data-btn="R2">
-        <rect x="622" y="4" width="218" height="56" rx="15" fill="url(#triggerGrad)" stroke="#6f727f" stroke-width="1.4"/>
-        <rect x="638" y="12" width="186" height="9" rx="4.5" fill="#ffffff" opacity="0.35"/>
-        <text x="731" y="38" class="cap-text">R2</text>
-      </g>
-      <g class="gpt bmp" data-btn="L1">
-        <rect x="138" y="46" width="196" height="40" rx="15" fill="url(#bumperGrad)" stroke="#a9acb8" stroke-width="1.4"/>
-        <text x="236" y="72" class="cap-text dark">L1</text>
-      </g>
-      <g class="gpt bmp" data-btn="R1">
-        <rect x="626" y="46" width="196" height="40" rx="15" fill="url(#bumperGrad)" stroke="#a9acb8" stroke-width="1.4"/>
-        <text x="724" y="72" class="cap-text dark">R1</text>
-      </g>
+      <!-- RT / RB -->
+      <button class="xp xp-trigger rt" data-btn="RT"><span>RT</span></button>
+      <button class="xp xp-trigger rb" data-btn="RB"><span>RB</span></button>
 
-      <!-- корпус -->
-      <path class="body" d="M 332 64
-        C 252 58, 122 76, 62 128
-        C 26 162, 22 258, 56 344
-        C 72 398, 122 426, 170 420
-        C 224 413, 254 356, 302 330
-        C 376 292, 584 292, 658 330
-        C 706 356, 736 413, 790 420
-        C 838 426, 888 398, 904 344
-        C 938 258, 934 162, 898 128
-        C 838 76, 708 58, 628 64
-        Q 480 52, 332 64 Z"
-        fill="url(#bodyGrad)" stroke="#000000" stroke-opacity="0.22" stroke-width="1.5"/>
-
-      <!-- тачпад -->
-      <g class="gpt pad" data-btn="TOUCHPAD">
-        <rect x="388" y="82" width="184" height="106" rx="13" fill="url(#touchGrad)" stroke="#a9acb8" stroke-width="1.6"/>
-        <rect x="380" y="86" width="7" height="98" rx="3.5" fill="url(#ledGrad)" opacity="0.9" filter="url(#ledGlow)"/>
-        <rect x="573" y="86" width="7" height="98" rx="3.5" fill="url(#ledGrad)" opacity="0.9" filter="url(#ledGlow)"/>
-      </g>
-
-      <!-- create / options -->
-      <g class="gpt meta" data-btn="CREATE" transform="translate(346,140)">
-        <rect x="-19" y="-11" width="38" height="22" rx="11" fill="#22232c" stroke="#000" stroke-opacity="0.5"/>
-        <path d="M -9 -5 V 5 M -4.5 -7 V 7 M 4.5 -7 V 7 M 9 -5 V 5" stroke="#e8e9ef" stroke-width="2" stroke-linecap="round"/>
-      </g>
-      <g class="gpt meta" data-btn="OPTIONS" transform="translate(614,140)">
-        <rect x="-19" y="-11" width="38" height="22" rx="11" fill="#22232c" stroke="#000" stroke-opacity="0.5"/>
-        <path d="M -9 -5.5 H 9 M -9 0 H 9 M -9 5.5 H 9" stroke="#e8e9ef" stroke-width="2" stroke-linecap="round"/>
-      </g>
-
-      <!-- динамики -->
-      <g stroke="#b6b9c4" stroke-width="3" stroke-linecap="round" opacity="0.9">
-        <path d="M 374 226 l 12 -16 M 388 229 l 12 -16 M 402 232 l 12 -16 M 416 235 l 12 -16"/>
-        <path d="M 586 226 l -12 -16 M 572 229 l -12 -16 M 558 232 l -12 -16 M 544 235 l -12 -16"/>
-      </g>
+      <!-- большой сквар (скриншот) -->
+      <button class="xp xp-square" data-btn="SQUARE" aria-label="Скриншот"></button>
 
       <!-- левый стик -->
-      <g class="gpt stick" data-btn="LSTICK" transform="translate(208,140)">
-        <circle r="47" fill="#101118" stroke="#000" stroke-opacity="0.6"/>
-        <circle r="37" fill="url(#stickGrad)" stroke="#2e2f39" stroke-width="2"/>
-        <circle r="24" fill="url(#capGrad)" stroke="#ffffff" stroke-opacity="0.10"/>
-        <ellipse cx="-7" cy="-8" rx="8" ry="5" fill="#ffffff" opacity="0.14"/>
-      </g>
+      <button class="xp stick" data-btn="LSTICK" aria-label="Стик"><span class="stick-cap"></span></button>
+      <button class="xp circle small l3" data-btn="L3"><span>L3</span></button>
 
-      <!-- D-pad -->
-      <g transform="translate(208,300)" opacity="0.96">
-        <path d="M -17 -52 h 34 v 35 h 35 v 34 h -35 v 35 h -34 v -35 h -35 v -34 h 35 z"
-              fill="#26272f" stroke="#0c0c10" stroke-width="2" stroke-linejoin="round"/>
-        <circle r="13" fill="#2f303a" stroke="#17171d"/>
-      </g>
-      <g class="gpt dhit" data-btn="DUP"><rect x="178" y="236" width="60" height="46" rx="10"/></g>
-      <g class="gpt dhit" data-btn="DDOWN"><rect x="178" y="318" width="60" height="46" rx="10"/></g>
-      <g class="gpt dhit" data-btn="DLEFT"><rect x="140" y="268" width="46" height="64" rx="10"/></g>
-      <g class="gpt dhit" data-btn="DRIGHT"><rect x="230" y="268" width="46" height="64" rx="10"/></g>
+      <!-- view / menu -->
+      <button class="xp pill view" data-btn="VIEW" aria-label="Сначала">
+        <svg viewBox="0 0 24 20" width="20" height="17"><rect x="2" y="2.5" width="9" height="7" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="8" y="7" width="14" height="10.5" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+      </button>
+      <button class="xp pill menu" data-btn="MENU" aria-label="Меню">
+        <svg viewBox="0 0 24 18" width="21" height="15"><path d="M3 3h18M3 9h18M3 15h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
 
-      <!-- кнопки действий -->
-      <g class="gpt face ftri" data-btn="TRIANGLE" transform="translate(742,108)">
-        <circle r="21.5" fill="url(#btnGrad)" stroke="#b2b5c0" stroke-width="1.5"/>
-        <path class="glyph" d="M 0 -8.4 L 7.3 5.8 L -7.3 5.8 Z" fill="none" stroke="#33333b" stroke-width="2.3" stroke-linejoin="round"/>
-      </g>
-      <g class="gpt face fcnt" data-btn="CIRCLE" transform="translate(816,168)">
-        <circle r="21.5" fill="url(#btnGrad)" stroke="#b2b5c0" stroke-width="1.5"/>
-        <circle class="glyph" r="7.8" fill="none" stroke="#33333b" stroke-width="2.3"/>
-      </g>
-      <g class="gpt face fcrx" data-btn="CROSS" transform="translate(742,228)">
-        <circle r="21.5" fill="url(#btnGrad)" stroke="#b2b5c0" stroke-width="1.5"/>
-        <path class="glyph" d="M -7 -7 L 7 7 M 7 -7 L -7 7" fill="none" stroke="#33333b" stroke-width="2.6" stroke-linecap="round"/>
-      </g>
-      <g class="gpt face fsqd" data-btn="SQUARE" transform="translate(668,168)">
-        <circle r="21.5" fill="url(#btnGrad)" stroke="#b2b5c0" stroke-width="1.5"/>
-        <rect class="glyph" x="-7.6" y="-7.6" width="15.2" height="15.2" rx="1.8" fill="none" stroke="#33333b" stroke-width="2.3"/>
-      </g>
+      <!-- ABXY -->
+      <button class="xp circle face y" data-btn="Y"><span>Y</span></button>
+      <button class="xp circle face x" data-btn="X"><span>X</span></button>
+      <button class="xp circle face b" data-btn="B"><span>B</span></button>
+      <button class="xp circle face a" data-btn="A"><span>A</span></button>
+      <button class="xp circle small r3" data-btn="R3"><span>R3</span></button>
 
-      <!-- правый стик -->
-      <g class="gpt stick" data-btn="RSTICK" transform="translate(560,300)">
-        <circle r="47" fill="#101118" stroke="#000" stroke-opacity="0.6"/>
-        <circle r="37" fill="url(#stickGrad)" stroke="#2e2f39" stroke-width="2"/>
-        <circle r="24" fill="url(#capGrad)" stroke="#ffffff" stroke-opacity="0.10"/>
-        <ellipse cx="-7" cy="-8" rx="8" ry="5" fill="#ffffff" opacity="0.14"/>
-      </g>
-
-      <!-- PS -->
-      <g class="gpt ps" data-btn="PS" transform="translate(480,238)">
-        <circle r="15.5" fill="#20212a" stroke="#3a3b46" stroke-width="1.6"/>
-        <path class="glyph" d="M -5 6.5 V -5.5 H 1 a 3.6 3.6 0 0 1 0 7.2 H -5" fill="none" stroke="#aab8ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-    </svg>
+      <!-- perf-монитор -->
+      <div class="perf" aria-hidden="true">
+        <div class="perf-line"><span class="pf-gpu">GPU</span><b id="pfGpu">0%</b></div>
+        <div class="perf-line"><span class="pf-cpu">CPU</span><b id="pfCpu">30%</b></div>
+        <div class="perf-line"><span class="pf-ram">RAM</span><b id="pfRam">97%</b></div>
+        <div class="perf-line"><span class="pf-pwr">Power</span><b id="pfPwr">2.5w</b></div>
+        <div class="perf-line"><span class="pf-dxvk">DXVK</span><b id="pfFps">58fps</b></div>
+        <canvas id="pfGraph" width="116" height="20"></canvas>
+      </div>
+    </div>
 
     <!-- пауза -->
     <div id="pauseMenu" class="overlay hidden">
       <div class="overlay-card">
         <div class="oc-art"><img src="img/bg_keyart.jpg" alt=""></div>
         <div class="oc-title">Grand Theft Auto <em>VI</em></div>
-        <button id="pmResume" class="oc-btn primary"><b>×</b> Продолжить</button>
-        <button id="pmExit" class="oc-btn"><b>○</b> В главное меню</button>
+        <button id="pmResume" class="oc-btn primary"><b>▶</b> Продолжить</button>
+        <button id="pmExit" class="oc-btn"><b>✕</b> В главное меню</button>
       </div>
     </div>
 
     <!-- конец демо -->
     <div id="gameEnd" class="overlay hidden">
       <div class="overlay-card slim">
-        <img class="oc-logo" src="img/logo.png" alt="Grand Theft Auto VI">
+        <img class="oc-logo" src="img/vi_logo.jpg" alt="Grand Theft Auto VI">
         <div class="oc-thanks">Спасибо за игру</div>
-        <button id="geMenuBtn" class="oc-btn primary"><b>○</b> В главное меню</button>
+        <button id="geMenuBtn" class="oc-btn primary">В главное меню</button>
       </div>
     </div>
   </section>
