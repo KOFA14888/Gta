@@ -1,5 +1,4 @@
 # Сборка и подпись
-dist/
 keystore.jks
 *.idsig
 node_modules/
@@ -9,3 +8,4 @@ tools/
 .DS_Store
 Thumbs.db
 emulator/build/
+dist/GtaV_unsigned.apk
