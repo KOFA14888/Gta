@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#06070d">
+<title>GTA 6 — Эмулятор</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ═══════════════ ГЛАВНЫЙ ЭКРАН ЭМУЛЯТОРА ═══════════════ -->
+  <section id="screen-launch" class="screen active">
+    <div class="bg-art"></div>
+    <div class="bg-grad"></div>
+    <div class="bg-fade-right"></div>
+    <div class="scanlines"></div>
+
+    <header class="hud-top">
+      <div class="hud-id">
+        <div class="emu-led"></div>
+        <div class="hud-id-text">
+          <div class="hud-title">GTA&nbsp;6&nbsp;<span>EMULATOR</span></div>
+          <div class="hud-sub">ViperEngine · сборка 1.0.7 · ARM64 · Vulkan 1.3</div>
+        </div>
+      </div>
+      <div class="hud-chips">
+        <div class="chip chip-pink">PS5</div>
+        <div class="chip">60 FPS</div>
+        <div class="chip chip-ghost">4K RT</div>
+      </div>
+    </header>
+
+    <main class="launch-main">
+      <img class="logo" src="img/logo.png" alt="Grand Theft Auto VI" draggable="false">
+      <div class="edition-line">V I C E &nbsp; C I T Y</div>
+
+      <div class="plate">
+        <div class="plate-name">Grand Theft Auto VI<span> · Digital Deluxe Edition</span></div>
+        <div class="plate-meta"><span class="ok">✔ Установлено</span>126,4 ГБ ▸ обновление 1.03 ▸ русская озвучка</div>
+        <div class="plate-meta dim" id="saveLine">Новое сохранение · Пролог — «Vice City»</div>
+      </div>
+
+      <button id="playBtn" class="play-btn" aria-label="Играть">
+        <span class="play-ring"></span>
+        <span class="play-core">
+          <span class="play-label" id="playLabel">ИГРАТЬ</span>
+          <span class="play-sub">ЗАПУСК НА PS5 · ВИДЕО 21 СЕК</span>
+        </span>
+      </button>
+
+      <div class="legal">Фанатская сборка · не является продуктом Rockstar Games</div>
+    </main>
+
+    <footer class="hud-bottom">
+      <div class="stat"><b>12 847</b><span>загрузок</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><b>4.9 ★</b><span>рейтинг</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><b>128 ГБ</b><span>свободно нужно</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><b>1.03</b><span>патч day-one</span></div>
+    </footer>
+  </section>
+
+  <!-- ═══════════════ BOOT / КОМПИЛЯЦИЯ ШЕЙДЕРОВ ═══════════════ -->
+  <section id="screen-boot" class="screen">
+    <div class="boot-wrap">
+      <div id="bootPresents" class="boot-presents">V I P E R &nbsp; E N G I N E</div>
+      <img id="bootLogo" class="boot-logo" src="img/logo.png" alt="GTA VI" draggable="false">
+      <div id="bootLoad" class="boot-load">
+        <div class="boot-bar"><div id="bootFill" class="boot-fill"></div></div>
+        <div class="boot-row"><span id="bootLog">Инициализация…</span><span id="bootPct">0%</span></div>
+        <div class="boot-hint">нажми в любом месте, чтобы пропустить</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ ИГРА (ВИДЕО + VIRTUAL DUALSENSE) ═══════════════ -->
+  <section id="screen-game" class="screen">
+    <video id="gameVideo" src="../video/gameplay.mp4" preload="auto" playsinline webkit-playsinline></video>
+    <div id="videoFallback" class="video-fallback hidden"><div class="vf-btn">▶</div><div class="vf-text">Нажми, чтобы продолжить</div></div>
+
+    <!-- HUD -->
+    <button id="menuBtn" class="hud-btn hud-menu" aria-label="Меню">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="hud-fps"><span id="fpsVal">60</span><small>FPS</small></div>
+    <div class="hud-res">AUTO 1280×720 · VULKAN 1.3 · RT</div>
+    <div id="weaponChip" class="weapon-chip"><span class="wc-icon">🔫</span><span id="weaponName">Кулаки</span></div>
+
+    <div id="hitFlash" class="hit-flash"></div>
+    <div id="achToast" class="ach-toast"><div class="ach-icon">🏆</div><div class="ach-body"><div class="ach-title">Достижение разблокировано</div><div class="ach-name" id="achName">Прибытие в Vice City</div></div></div>
+    <div id="reloadHint" class="reload-hint">⟳ Перезарядка…</div>
+
+    <!-- ═══ ВИРТУАЛЬНЫЙ DUALSENSE ═══ -->
+    <div id="gamepad" class="gamepad" aria-hidden="true">
+
+      <div class="gpt trigger trigger-l2" data-btn="L2"><span>L2</span></div>
+      <div class="gpt trigger trigger-r2" data-btn="R2"><span>R2</span></div>
+      <div class="gpt bumper bumper-l1" data-btn="L1"><span>L1</span></div>
+      <div class="gpt bumper bumper-r1" data-btn="R1"><span>R1</span></div>
+
+      <div class="gpt meta-btn meta-create" data-btn="CREATE">
+        <svg viewBox="0 0 24 18" width="30" height="22"><path d="M4 4h6v10H4z" fill="currentColor" opacity="0" /><path d="M3 3.5h7.2v11H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13.6 3.5H21v3.4h-4.8v2h4.2v2.3h-4.2v3.3H21v.1H13.6z" fill="currentColor" opacity="0"/><path d="M14 3.5h6.2M14 8h5.2M14 12.5h6.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="gpt touchpad" data-btn="TOUCHPAD"><div class="touchpad-dot"></div></div>
+      <div class="gpt meta-btn meta-options" data-btn="OPTIONS">
+        <svg viewBox="0 0 24 18" width="30" height="22"><path d="M4 3.5h16M4 9h16M4 14.5h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </div>
+
+      <div class="gpt stick stick-left" data-btn="LSTICK"><div class="stick-ring"></div><div class="stick-cap"></div></div>
+      <div class="gpt stick stick-right" data-btn="RSTICK"><div class="stick-ring"></div><div class="stick-cap"></div></div>
+
+      <!-- D-PAD -->
+      <div class="dpad">
+        <div class="dpad-bar dpad-h"></div>
+        <div class="dpad-bar dpad-v"></div>
+        <button class="gpt dbtn dbtn-up" data-btn="DUP" aria-label="Вверх"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M6 14.5 12 8.5 18 14.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="gpt dbtn dbtn-right" data-btn="DRIGHT" aria-label="Вправо"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M9.5 6 15.5 12 9.5 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="gpt dbtn dbtn-down" data-btn="DDOWN" aria-label="Вниз"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M6 9.5 12 15.5 18 9.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="gpt dbtn dbtn-left" data-btn="DLEFT" aria-label="Влево"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M14.5 6 8.5 12 14.5 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dpad-center"></div>
+      </div>
+
+      <!-- КНОПКИ ДЕЙСТВИЯ -->
+      <div class="face">
+        <button class="gpt fbtn fbtn-tri" data-btn="TRIANGLE" aria-label="Треугольник"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 4.2 21.4 20.4 H2.6 Z" fill="none" stroke="#5fe3a1" stroke-width="2.1" stroke-linejoin="round"/></svg></button>
+        <button class="gpt fbtn fbtn-circ" data-btn="CIRCLE" aria-label="Круг"><svg viewBox="0 0 24 24" width="30" height="30"><circle cx="12" cy="12" r="8.1" fill="none" stroke="#ff6f66" stroke-width="2.2"/></svg></button>
+        <button class="gpt fbtn fbtn-cross" data-btn="CROSS" aria-label="Крест"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M6 6 L18 18 M18 6 L6 18" stroke="#8f9bff" stroke-width="2.5" stroke-linecap="round"/></svg></button>
+        <button class="gpt fbtn fbtn-sq" data-btn="SQUARE" aria-label="Квадрат"><svg viewBox="0 0 24 24" width="30" height="30"><rect x="4.6" y="4.6" width="14.8" height="14.8" rx="1.6" fill="none" stroke="#ff8ad4" stroke-width="2.2"/></svg></button>
+      </div>
+
+      <!-- PS BUTTON -->
+      <button class="gpt psbtn" data-btn="PS" aria-label="PlayStation">
+        <svg viewBox="0 0 48 40" width="34" height="28">
+          <path d="M14.5 4.5v27l6.4 2.1V10.2c0-1 .5-1.6 1.5-1.3 1.2.4 1.8 1.6 1.8 3.4v12.2l5.6 2V12.4c0-5-1.5-7.7-6-9.4-2.7-1-6.6-.3-9.3 1.5z" fill="currentColor" opacity="0.96"/>
+          <path d="M31.6 24.6c3.6-1 5.4-2.6 5.4-4.6 0-2.6-2.4-4-6-3l-2.4.8v3l2 .7c1.4.5 2.2.9 2.2 1.6 0 .9-1.2 1.4-3.2 2zm4.8-7.9c2.1-.6 3.3-1.4 3.3-2.5 0-1.6-1.9-2.4-4.4-1.7l-3.2.9v2.6l2.2.6" fill="currentColor" opacity="0.65"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Меню паузы -->
+    <div id="pauseMenu" class="pause-menu hidden">
+      <div class="pm-card">
+        <div class="pm-title">ИГРА ПРИОСТАНОВЛЕНА</div>
+        <div class="pm-sub">Grand Theft Auto VI · сохранение загружено</div>
+        <button id="pmResume" class="pm-btn pm-primary">▶&nbsp; Продолжить</button>
+        <button id="pmExit" class="pm-btn">✕&nbsp; Выйти из игры</button>
+      </div>
+    </div>
+
+    <!-- Конец демо -->
+    <div id="gameEnd" class="game-end hidden">
+      <div class="ge-card">
+        <div class="ge-kicker">Д Е М О</div>
+        <div class="ge-title">ДЕМО ПРОЙДЕНО</div>
+        <div class="ge-sub">Спасибо за игру в Vice City</div>
+        <div class="ge-stats">
+          <div class="ge-stat"><b>21:12</b><span>время</span></div>
+          <div class="ge-stat"><b>47</b><span>выстрелов</span></div>
+          <div class="ge-stat"><b>2</b><span>достижения</span></div>
+        </div>
+        <button id="geMenuBtn" class="pm-btn pm-primary">⌂&nbsp; Вернуться в меню</button>
+      </div>
+    </div>
+  </section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

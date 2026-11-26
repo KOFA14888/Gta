@@ -1,0 +1,11 @@
+# Сборка и подпись
+dist/
+keystore.jks
+*.idsig
+node_modules/
+tools/
+
+# ОС/редакторы
+.DS_Store
+Thumbs.db
+emulator/build/
